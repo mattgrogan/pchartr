@@ -26,16 +26,3 @@ And a function to check all eight rules:
 ```
 check_nelson_rules() # Checks all eight rules.
 ```
-
-Development
-===========
-***********
-
-Since this package is not available on cran, the easiest way to try it out is to:
-
-```
-# install.packages("devtools")
-devtools::install_github("bigvis")
-```
-
-
