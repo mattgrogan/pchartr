@@ -1,12 +1,10 @@
 pchartr
 =======
-*******
 
 pchartr is a collection of tools for analyzing control charts, specifically p-charts.
 
 Functions
 =========
-*********
 
 There are functions for checking control charts for violations of the eight [Nelson rules](http://en.wikipedia.org/wiki/Nelson_rules).
 
@@ -18,7 +16,7 @@ nelson.rule4() # Checks for fourteen or more points alternating in direction.
 nelson.rule5() # Checks for two out of three points that are more than two standard deviations from the mean.
 nelson.rule6() # Checks for four out of five points that are more than one standard deviation from the mean
 nelson.rule7() # Checks for fifteen consecutive points within one standard deviation of the mean.
-nelson.rule8() # Checks for eight consecutive points with none within one standard deviation of the mean
+nelson.rule8() # Checks for eight consecutive points with none within one standard deviation of the mean.
 ```
 
 And a function to check all eight rules:
