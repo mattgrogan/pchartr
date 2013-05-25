@@ -1,0 +1,25 @@
+#' Check all nelson rules
+#'
+#' Checks all Nelson rules for violations.
+#' 
+#' @param x vector of control chart values
+#' @param mean vector of control chart mean values
+#' @param ucl vector of upper control limit values
+#' @param lcl vector of lower control limit values
+#' 
+#' @return A nested list of length 8 containing the following components:
+#' \item{violated}{boolean indicating if the rule was violated}
+#' \item{matches}{vector of indices which violate the rule}
+check_nelson_rules <- function(x, mean, ucl, lcl, rules=1:8) {
+  r1 <- nelson_rules$rule1(x, mean, ucl, lcl)
+  r2 <- nelson_rules$rule2(x, mean, ucl, lcl)
+  r3 <- nelson_rules$rule3(x, mean, ucl, lcl)
+  r4 <- nelson_rules$rule4(x, mean, ucl, lcl)
+  r5 <- nelson_rules$rule5(x, mean, ucl, lcl)
+  r6 <- nelson_rules$rule6(x, mean, ucl, lcl)
+  r7 <- nelson_rules$rule7(x, mean, ucl, lcl)
+  r8 <- nelson_rules$rule8(x, mean, ucl, lcl)
+  retval <- list(r1, r2, r3, r4, r5, r6, r7, r8)
+  class(retval) <- 'nelson_rule_result'
+  return(retval)
+}
