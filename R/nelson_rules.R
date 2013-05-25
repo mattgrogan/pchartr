@@ -10,7 +10,8 @@
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
-nelson.rule1 = function(x, mean, ucl, lcl) { 
+#' @export
+nelson.rule1 <- function(x, mean, ucl, lcl) { 
   retval <- list()
   retval$which <- which(x > ucl | x < lcl)
   retval$violated <- any(retval$which)
@@ -29,7 +30,7 @@ nelson.rule1 = function(x, mean, ucl, lcl) {
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
-nelson.rule2 = function(x, mean, ucl, lcl) {
+nelson.rule2 <- function(x, mean, ucl, lcl) {
   retval <- list(violated=FALSE, which=NULL)
   
   # Get a vector with 1 = above mean and 2 = below mean
@@ -65,8 +66,8 @@ nelson.rule2 = function(x, mean, ucl, lcl) {
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
-nelson.rule3 = function(x, mean, ucl, lcl) {
-
+nelson.rule3 <- function(x, mean, ucl, lcl) {
+  
   retval <- list(violated=FALSE, which=NULL)
   
   # Get a vector of differences
@@ -103,8 +104,8 @@ nelson.rule3 = function(x, mean, ucl, lcl) {
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
-nelson.rule4 = function(x, mean, ucl, lcl) {
-
+nelson.rule4 <- function(x, mean, ucl, lcl) {
+  
   retval <- list(violated=FALSE, which=NULL)
   
   # Get a vector of differences
@@ -142,8 +143,8 @@ nelson.rule4 = function(x, mean, ucl, lcl) {
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
-nelson.rule5 = function(x, mean, ucl, lcl) {
-
+nelson.rule5 <- function(x, mean, ucl, lcl) {
+  
   retval <- list(violated=FALSE, which=NULL)
   
   # Get a vector of differences
@@ -200,7 +201,7 @@ nelson.rule5 = function(x, mean, ucl, lcl) {
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
-nelson.rule6 = function(x, mean, ucl, lcl) {
+nelson.rule6 <- function(x, mean, ucl, lcl) {
   
   retval <- list(violated=FALSE, which=NULL)
   
@@ -256,8 +257,8 @@ nelson.rule6 = function(x, mean, ucl, lcl) {
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
-nelson.rule7 = function(x, mean, ucl, lcl) {
-
+nelson.rule7 <- function(x, mean, ucl, lcl) {
+  
   retval <- list(violated=FALSE, which=NULL)
   
   # Get a vector of differences
@@ -282,7 +283,7 @@ nelson.rule7 = function(x, mean, ucl, lcl) {
   retval$violated <- any(retval$which)
   
   return(retval)  
-
+  
 }
 
 #' Nelson Rule Eight (8 points with none within 1 SD from the mean)
@@ -298,8 +299,8 @@ nelson.rule7 = function(x, mean, ucl, lcl) {
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
-nelson.rule8 = function(x, mean, ucl, lcl) {
-
+nelson.rule8 <- function(x, mean, ucl, lcl) {
+  
   retval <- list(violated=FALSE, which=NULL)
   
   # Get a vector of differences
