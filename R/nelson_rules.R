@@ -56,7 +56,7 @@ nelson.rule2 <- function(x, mean, ucl, lcl) {
 
 #' Nelson Rule Three (6+ points increasing or decreasing)
 #' 
-#' Checks for six or more consecutive points increasing or decreasing
+#' Checks for six or more consecutive increasing or decreasing points.
 #' 
 #' @param x vector of control chart values
 #' @param mean vector of control chart mean values
@@ -94,7 +94,7 @@ nelson.rule3 <- function(x, mean, ucl, lcl) {
 
 #' Nelson Rule Four (14+ points alternating)
 #' 
-#' Checks for fourteen or more points alternating in direction, increasing or decreasing.
+#' Checks for fourteen or more points alternating in direction.
 #' 
 #' @param x vector of control chart values
 #' @param mean vector of control chart mean values
