@@ -20,7 +20,7 @@
   the rule}
 }
 \description{
-  Checks for six or more consecutive points increasing or
-  decreasing
+  Checks for six or more consecutive increasing or
+  decreasing points.
 }
 

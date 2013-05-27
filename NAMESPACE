@@ -1,1 +1,8 @@
 export(nelson.rule1)
+export(nelson.rule2)
+export(nelson.rule3)
+export(nelson.rule4)
+export(nelson.rule5)
+export(nelson.rule6)
+export(nelson.rule7)
+export(nelson.rule8)

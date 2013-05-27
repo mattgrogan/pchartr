@@ -21,6 +21,6 @@
 }
 \description{
   Checks for fourteen or more points alternating in
-  direction, increasing or decreasing.
+  direction.
 }
 

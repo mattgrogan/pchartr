@@ -9,6 +9,13 @@ Depends:
     R (>= 3.0.0)
 License: GPL-2
 Collate:
-    'nelson_rules.R'
     'pchartr-package.r'
     'check_nelson_rules.R'
+    'nelson.rule1.R'
+    'nelson.rule2.R'
+    'nelson.rule3.R'
+    'nelson.rule4.R'
+    'nelson.rule5.R'
+    'nelson.rule6.R'
+    'nelson.rule7.R'
+    'nelson.rule8.R'
