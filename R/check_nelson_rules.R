@@ -10,15 +10,16 @@
 #' @return A nested list of length 8 containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
-check_nelson_rules <- function(x, mean, ucl, lcl, rules=1:8) {
-  r1 <- nelson_rules$rule1(x, mean, ucl, lcl)
-  r2 <- nelson_rules$rule2(x, mean, ucl, lcl)
-  r3 <- nelson_rules$rule3(x, mean, ucl, lcl)
-  r4 <- nelson_rules$rule4(x, mean, ucl, lcl)
-  r5 <- nelson_rules$rule5(x, mean, ucl, lcl)
-  r6 <- nelson_rules$rule6(x, mean, ucl, lcl)
-  r7 <- nelson_rules$rule7(x, mean, ucl, lcl)
-  r8 <- nelson_rules$rule8(x, mean, ucl, lcl)
+#' @export
+check_nelson_rules <- function(x, mean, ucl, lcl) {
+  r1 <- nelson.rule1(x, mean, ucl, lcl)
+  r2 <- nelson.rule2(x, mean, ucl, lcl)
+  r3 <- nelson.rule3(x, mean, ucl, lcl)
+  r4 <- nelson.rule4(x, mean, ucl, lcl)
+  r5 <- nelson.rule5(x, mean, ucl, lcl)
+  r6 <- nelson.rule6(x, mean, ucl, lcl)
+  r7 <- nelson.rule7(x, mean, ucl, lcl)
+  r8 <- nelson.rule8(x, mean, ucl, lcl)
   retval <- list(r1, r2, r3, r4, r5, r6, r7, r8)
   class(retval) <- 'nelson_rule_result'
   return(retval)

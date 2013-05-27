@@ -2,7 +2,7 @@
 \alias{check_nelson_rules}
 \title{Check all nelson rules}
 \usage{
-  check_nelson_rules(x, mean, ucl, lcl, rules = 1:8)
+  check_nelson_rules(x, mean, ucl, lcl)
 }
 \arguments{
   \item{x}{vector of control chart values}
