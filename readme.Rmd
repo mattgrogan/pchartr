@@ -3,6 +3,14 @@ pchartr
 
 pchartr is a collection of tools for analyzing control charts, specifically p-charts.
 
+Usage Scenarios
+===============
+
+Ultimately this package will serve two purposes:  
+
+1. Provide support for programatically detecting out-of-control points in a control chart.  
+2. Provide functionality for determining the minimum sample size to detect an out-of-control situation with a specified degree of confidence.  
+
 Functions
 =========
 
@@ -23,4 +31,34 @@ And a function to check all eight rules:
 
 ```
 check_nelson_rules() # Checks all eight rules.
+```
+
+Example
+=======
+
+```{r}
+library(pchartr)
+
+# Set up data
+x <- c(0.0912, 0.0942, 0.1032, 0.1043, 0.1068,
+      0.1068, 0.0876, 0.1108, 0.1050, 0.0887,
+      0.0881, 0.0990, 0.1184, 0.1502, 0.0986, 
+      0.0966, 0.0876, 0.0933, 0.0954, 0.1155)
+
+# Caclulate the mean value
+mean <- rep(mean(x), length(x))
+
+# Calculate upper and lower control limits
+n <- 500
+sd <- sqrt(mean(x) * (1 - mean(x)) / n)
+ucl <- mean + 3 * sd
+lcl <- mean - 3 * sd
+
+# Nelson's first rule checks for any points outside the upper and lower control limits
+nelson.rule <- nelson.rule1(x, mean, ucl, lcl)
+
+# Plot the results
+plot(nelson.rule, ylim=c(0.0, 0.2), xlab="Time", ylab="p",
+     main="Nelson Rule One")
+
 ```

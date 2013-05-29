@@ -37,6 +37,11 @@ nelson.rule8 <- function(x, mean, ucl, lcl) {
   
   retval$violated <- any(retval$which)
   
+  retval$x <- x
+  retval$mean <- mean
+  retval$ucl <- ucl
+  retval$lcl <- lcl
+  class(retval) <- 'nelson_rule'
   return(retval)  
   
 }  

@@ -20,7 +20,7 @@ check_nelson_rules <- function(x, mean, ucl, lcl) {
   r6 <- nelson.rule6(x, mean, ucl, lcl)
   r7 <- nelson.rule7(x, mean, ucl, lcl)
   r8 <- nelson.rule8(x, mean, ucl, lcl)
-  retval <- list(r1, r2, r3, r4, r5, r6, r7, r8)
-  class(retval) <- 'nelson_rule_result'
+  retval <- list(x, mean, ucl, lcl, r1, r2, r3, r4, r5, r6, r7, r8)
+  class(retval) <- 'nelson_rule'
   return(retval)
 }
