@@ -37,6 +37,9 @@ nelson.rule8 <- function(x, mean, ucl, lcl) {
   
   retval$violated <- any(retval$which)
   
+  retval$rule <- 8
+  retval$descr <- "8 points with none within 1 SD from the mean"
+  
   retval$x <- x
   retval$mean <- mean
   retval$ucl <- ucl

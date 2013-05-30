@@ -32,7 +32,10 @@ nelson.rule3 <- function(x, mean, ucl, lcl) {
   }
   
   retval$violated <- any(retval$which)
- 
+
+  retval$rule <- 3
+  retval$descr <- "6+ points increasing or decreasing"
+  
   retval$x <- x
   retval$mean <- mean
   retval$ucl <- ucl

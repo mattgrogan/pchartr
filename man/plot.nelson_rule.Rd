@@ -2,7 +2,7 @@
 \alias{plot.nelson_rule}
 \title{plot.nelson_rule}
 \usage{
-  plot.nelson_rule(x, ...)
+  \method{plot}{nelson_rule} (x, ...)
 }
 \arguments{
   \item{x}{object of class /code{nelson_rule}}

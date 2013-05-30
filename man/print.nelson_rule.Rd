@@ -2,7 +2,7 @@
 \alias{print.nelson_rule}
 \title{print.nelson_rule}
 \usage{
-  print.nelson_rule(x, ...)
+  \method{print}{nelson_rule} (x, ...)
 }
 \arguments{
   \item{x}{object of class /code{nelson_rule}}

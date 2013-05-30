@@ -32,6 +32,9 @@ nelson.rule4 <- function(x, mean, ucl, lcl) {
   }
   
   retval$violated <- any(retval$which)
+
+  retval$rule <- 4
+  retval$descr <- "14+ points alternating"
   
   retval$x <- x
   retval$mean <- mean

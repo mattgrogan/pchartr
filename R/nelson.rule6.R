@@ -51,6 +51,9 @@ nelson.rule6 <- function(x, mean, ucl, lcl) {
     }
   }    
   retval$violated <- any(retval$which)
+ 
+  retval$rule <- 6
+  retval$descr <- "4 out of 5 points outside 1 SD from the mean"
   
   retval$x <- x
   retval$mean <- mean

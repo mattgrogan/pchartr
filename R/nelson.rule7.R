@@ -36,6 +36,9 @@ nelson.rule7 <- function(x, mean, ucl, lcl) {
   
   retval$violated <- any(retval$which)
   
+  retval$rule <- 7
+  retval$descr <- "15 points within 1 SD from the mean"
+  
   retval$x <- x
   retval$mean <- mean
   retval$ucl <- ucl

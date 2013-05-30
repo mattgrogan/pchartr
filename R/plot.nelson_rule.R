@@ -6,6 +6,8 @@
 #' @param ... arguments to be passed to methods, such as graphical parameters.
 #' 
 #' @return An object of type 
+#' @S3method plot nelson_rule
+#' @method plot nelson_rule
 #' @export
 plot.nelson_rule <- function(x, ...) {
   # TODO: Add proper labels for x-axis
