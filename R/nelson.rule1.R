@@ -12,13 +12,21 @@
 #' \item{matches}{vector of indices which violate the rule}
 #' @export
 nelson.rule1 <- function(x, mean, ucl, lcl) { 
+  
   retval <- list()
+
+  # Rule Data
   retval$which <- which(x > ucl | x < lcl)
   retval$violated <- any(retval$which)
+  
+  retval$rule <- 1 
+  retval$descr <- "Points outside the control limits"
+  
   retval$x <- x
   retval$mean <- mean
   retval$ucl <- ucl
   retval$lcl <- lcl
   class(retval) <- 'nelson_rule'
+  
   return(retval)
 }

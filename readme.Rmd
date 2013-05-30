@@ -37,6 +37,7 @@ Example
 =======
 
 ```{r}
+
 library(pchartr)
 
 # Set up data

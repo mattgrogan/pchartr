@@ -20,5 +20,6 @@ Collate:
     'nelson.rule7.R'
     'nelson.rule8.R'
     'plot.nelson_rule.R'
+    'print.nelson_rule.R'
 Suggests:
     testthat (>= 0.2)
