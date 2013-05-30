@@ -24,6 +24,5 @@ plot.nelson_rule <- function(x, ...) {
   # Add red points for violators
   points(x=x$which, y=x$x[x$which], col="red", pch=19)
   
-  # Return plot
-  return(nr.plot)
+  invisible()
 }

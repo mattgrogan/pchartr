@@ -195,28 +195,25 @@ hljs.initHighlightingOnLoad();
 
 <p>There are functions for checking control charts for violations of the eight <a href="http://en.wikipedia.org/wiki/Nelson_rules">Nelson rules</a>.</p>
 
-<pre><code>nelson.rule1() # Checks for any points outside the upper and lower control limits.
-nelson.rule2() # Checks for nine or more points in a row on the same side of the mean.
-nelson.rule3() # Checks for six or more consecutive increasing or decreasing points.
-nelson.rule4() # Checks for fourteen or more points alternating in direction.
-nelson.rule5() # Checks for two out of three points that are more than two standard deviations from the mean.
-nelson.rule6() # Checks for four out of five points that are more than one standard deviation from the mean
-nelson.rule7() # Checks for fifteen consecutive points within one standard deviation of the mean.
-nelson.rule8() # Checks for eight consecutive points with none within one standard deviation of the mean.
-</code></pre>
-
-<p>And a function to check all eight rules:</p>
-
-<pre><code>check_nelson_rules() # Checks all eight rules.
-</code></pre>
+<ul>
+<li><code>nelson.rule1()</code> checks for any points outside the upper and lower control limits.</li>
+<li><code>nelson.rule2()</code> checks for nine or more points in a row on the same side of the mean.</li>
+<li><code>nelson.rule3()</code> checks for six or more consecutive increasing or decreasing points.</li>
+<li><code>nelson.rule4()</code> checks for fourteen or more points alternating in direction.</li>
+<li><code>nelson.rule5()</code> checks for two out of three points that are more than two standard deviations from the mean.</li>
+<li><code>nelson.rule6()</code> checks for four out of five points that are more than one standard deviation from the mean</li>
+<li><code>nelson.rule7()</code> checks for fifteen consecutive points within one standard deviation of the mean.</li>
+<li><code>nelson.rule8()</code> checks for eight consecutive points with none within one standard deviation of the mean.</li>
+</ul>
 
 <h1>Example</h1>
 
-<pre><code class="r">library(pchartr)
+<pre><code class="r">
+library(pchartr)
 
 # Set up data
-x &lt;- c(0.0912, 0.0942, 0.1032, 0.1043, 0.1068, 0.1068, 0.0876, 0.1108, 0.105, 
-    0.0887, 0.0881, 0.099, 0.1184, 0.1502, 0.0986, 0.0966, 0.0876, 0.0933, 0.0954, 
+x &lt;- c(0.0912, 0.0942, 0.0601, 0.068, 0.0712, 0.0836, 0.0984, 0.1069, 0.1114, 
+    0.0887, 0.0881, 0.099, 0.1184, 0.0802, 0.0986, 0.0966, 0.0876, 0.0933, 0.0954, 
     0.1155)
 
 # Caclulate the mean value
@@ -230,16 +227,27 @@ lcl &lt;- mean - 3 * sd
 
 # Nelson&#39;s first rule checks for any points outside the upper and lower
 # control limits
-nelson.rule &lt;- nelson.rule1(x, mean, ucl, lcl)
+nelson.rule &lt;- nelson.rule3(x, mean, ucl, lcl)
 
+# Show the results
+nelson.rule
+</code></pre>
+
+<pre><code>## 
+## Nelson Rule 3: 6+ points increasing or decreasing
+## 
+## Violated: TRUE
+## Which: 4, 5, 6, 7, 8, 9
+## Length of data (x): 20
+</code></pre>
+
+<pre><code class="r">
 # Plot the results
-plot(nelson.rule, ylim = c(0, 0.2), xlab = &quot;Time&quot;, ylab = &quot;p&quot;, main = &quot;Nelson Rule One&quot;)
+plot(nelson.rule, ylim = c(0, 0.2), xlab = &quot;Time&quot;, ylab = &quot;p&quot;, main = paste(&quot;Nelson Rule&quot;, 
+    nelson.rule$rule))
 </code></pre>
 
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAeFBMVEX9/v0AAAAAACoAAFQAKioAKn8AVX8AVakqAAAqACoqAFQqKn8qVakqf9NUAABUACpUAFRUVQBUqalUqf1/KgB/Kip/KlR/f1R/qX9/1NN/1P2pVQCpqVSp1H+p/v3TfyrT1H/T/v39qVT91H/9/qn9/tP9/v3/AAA5hBCgAAAAKHRSTlP//////////////////////////////////////////////////wD/AIw85wAAAAlwSFlzAAALEgAACxIB0t1+/AAADSFJREFUeJztnYla48gZAFcQAtlZmEnsnWQggcUX7/+GsSTb+JCNpFarZVXV9xkbUP99lPsSEv5tJUh+S10ASYPioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHsrYxC+esslqtZzevu79aO+bc4ly9g+rSFQcdffeXVmTMkLxazftxO9bPU00fyiOuXnusrjpGKH47HEj/m3tabJxmGsrVOY/fCzGhP/u+nhpOf9aJFw83b2XP9pEyFlOs/v108v63bGXdu+AK2N84m//ufH3UvTQx0Jo2afXPbr84X3usXyxSVQpfhshZ/5QjAfL6c3zZ9r9A66MEYr/38Nj7q8wlb/IHW60rfWth+rFUyHvcTXbDO7bof5+dSB+FyE/ZrZ5k7xkk13agwOujBGKf325+bWWMcs2c/Kux68FlfrecnnFO+BA/HZVuBW/i5AfcyB+k/bggCtjjOIXT38/Fl8uzW6e98RvDH8m2kz9Z8QfDPWbgxQ/HArLb3nv3o7unwv0dWfdG+qPxOdvjUk+9U/WyfeG+i2Hi7sy7cEBV8Yoxa8l7ZZmW4ebjfrn4u5Y/Nr3UaLdN0Xkz+3cZ9qDA66LUYpfT8j515dSym6oL4bkz+3csfiiT+fT/b9227mXfa3FYj7/bi/ty7V6H514qYnioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB5KiPhMhkxE8QFpJTbB4je3DlXcC6z4IRMqfjkt/+PD7PROIcUPmVDxix+vB8/1Q0tS7PFQguf4iv8FVi+0JMVVPRTFQ+liO5f/RwEXd1dGF4u75fRR8ddGN9u5l3vFXxkdbefe/va74q+KDrZzxb/sfPvcz9X8M4AkxVU9FMVD6Uq8i7srwx4PRfFQvBADin+WheKFGFDs8VC8EAOKq3ooioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKhxIqfvHjdbV4yrK796ahJSkdiM/dr+Z/NA0tSelA/Pzbe9nzm4WWpASLf7r59TPv8d9OxnrFD5nwxd1ymt2vZrcnHV7xg8ZVPRTFQ1E8FMVDCV/VZyWnqzvFV/Dx8ZG6CCXBPX45fWwXGsnHx1DMhw/1i+/PRyG3tC/VaBmT+LahkSieylC8dybec/X1yIbSLPb4XskG0yyK75URiZ8/nNnGD6WGg2I84pfTSfE8O70EZyA1HBLZ7ktyurj0av+5fmgiIxJvj2/CiMRvT9Y7x9cg2/uaGlf1PaJ4JtnRc1L6E5+fq2Q/sqPnfh/JxAu0x+PJTl6kRPG9kVW8Sofie0PxTLLKl8lQfF8onkl25nUqFN8T2dlv0qD4nlA8k+zCd0lQfD8onslxW6RvG8X3guKhKJ7JSVOkbxvF98FpUyRvHMX3geKZVLRE8sZRfA8onklVQyRvHMXHp7IhUreO4uOjeCbV7ZC6dRQfHcUzOdcMiZtH8bFRPBTFMznbCoofN4qHcr4V0raP4uNyoREUP2YUz+RSGyh+xFxsg6QNpPioKJ7J5SZQ/GhRPBTFM/mqBVK2kOKj8fXHMSl+jNT4IC7FjxHFQ6nz0XsJm0jx0ajxkYuKHyF1qt9jEx2/DRUfi2GJP5l4FB+JWrVX/OioWfne2kjxPTE08c7x/VC37v31+IY5K74dimdSv+o9NdJpNkzxNc6tBIWPcmgAFbkgxdc5mxoUP8qhASi+JLL4JqF7aaSqTLji4xWvUeQ+WknxWwrtsdQ3C9tDK1VmgRS/LVkU9Q1jKr5HPksWQf3gxFfncL3iq2bpejP34TnrjovZNFx08WcyuFrxVeuzmmu2o0M6Vd88VmzzscTPH4rmvn1tGjqQ7Bxfp6yI1V2xekjRSfhQ8cvppHie3b03DN2es5Lbii/Vd7HDaxHhSsUvfrwePNcP3YSdkz21bef4c0NfJ3v7wYk/G/0qenyDcfzrXM92gQ7Et0qf5uRx8By/eOp2jj9p/frOa+V6vguEi29Z47BMW8Ye2qp+2/wHnbyRky8OvNAUaTp8TPEXQg9SfFWv7yjfy3HCHLRMrfgiUeQBt/V4EJpxpDxbR+5P/PbvIl88sprHXXhkidIOLc/DuK3EL6frMPdVB2zWdlWruxbv5G7e/O0HuJASpEgZELeW+OX0cf31rdJ8+bsWoSsSdNUCZ+PUyKB1GQYnPmg5U4ovz85UnKMpfvn9+Shkww1YzaJ0EapOFm2XJm2SBeQYGrbeUF909uoe3zp04OFtYtXKok05wpakXZwrroga9OtNjz8/kbcPfXRwt3WvjlYvjzZrkxDxnZwrrggb9Ovaq/rAc/VdV7wyXt1MmhcmXHzn5r8K2JX4Flm3OzQgYu1cWixLw0b6chu7HyT0rRC6felFfE9TXP1cel6W7kneLouDB4H44sMvxIizqA0R37BIEcar+KvFUPHhf5bt6/RFs7VmpGNrx4y+WgwVH3QhRqT1bHX+scRHGrACmqYX8SE9Pq73o/xjnVWIWIG224texIdciBFZ/GEBIi3YYpa/5qC5e7H/OjR0tFV92/O6bQvQovPUOSau9xq78dbtmEL8rpxxvR+UIIr42NpXX7612ved3sRvChi5k58rQqsT8MEHdMKlXAIGzb7E9zCyXypCq3zDznZ3xoWRM2DQ7FV8QLCwMsToFP3VpjqnuOd00eIvj7LtQrai6sqp0Pz7nuP7JjstSdPUDX8TheOTUeHZD+GPNFHJViElOfd27b1uB1vTLnIniA/yftrKSSetzs4djF580ByT7XHws05K1qIsPVyQWnL94jv7O1dW9S7ok24zVvxXqbsNGIDiG9G9p0TeFd+QVJ66p9OajF+8VKJ4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCiKh6J4KIqHongoioeieCj9if/48JHykUy8DArFQ1E8FMVDUTwUxUNRPJRQ8Ysfr6vFU5bdvTcNLUnpQHzufjX/o2loSUoH4uff3sue3yy0JCVY/NPNr595j/92MtYrfsiEL+6W0+x+Nbs96fCKHzSu6qEoHkqw+PlD8dGXDvVXRqj45XRSPM9ON/KKHzJdnMDZf64fWpJij4cSPMfn52sP5/hsS2jZJCKu6qEoHkpX4l3cXRn2eCiKh+KZOyju46F45g6KPR5KhDN3NUNLUlzVQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTyUYPHzhyzn9rVpaElKqPjldFI8z+7eG4aWpISKX/x4PXiuH1qSYo+HEjzHL56c468RV/VQFA/F7RwUF3dQ3M5BscdDibCdy7aElk0i4qoeiuKhdCXexd2VYY+HongonrmD4j4eimfuoNjjoXghBhRX9VAUD0XxUGKKlyETT3xsehlRqJkoHpqJ4qGZKB6aieKhmSgemonioZkMWbxERPFQFA9F8VAUD0XxUBQPRfFQFA9F8VAGK/4tq7yyt1Pmv78WVxGfXjnedSZxa5Pf7DRpWJPBin+ZRM9ilrvI7xt4u4+cSdzaLL4/r+b/eG5Wk6GKX/75HDuLl5v/rDtjfodQ0SljZhK3NrPc9sukWU2GKr64jSN2p8+baf7tvegyUTOJX5t1FZrVZKji10NX/F6fO8lvDYsuPnptltPHhjUZqviC2PN8bz2+IGJtFk+Pq4Y1wYuPPMf3In7+kIcexxyfj1vLnz1s5/JBMuaqfjefxKtN6b1hTYYqPt/53sRe2Pe6j49Xm7fixpnJSPbxEhfFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQyGLX06LqxTv/op5dfVQIYtfreJeUT9oFF98Wf757yx7nK0fxfXWse/PHgCKL8VP71fzh/vi+5fId1gMA8Vvenx5V+Pi+3N++1nFpyuODcWfiM9vaY5+E09yFH8ifvy9PUfxx+LzOb7i81THhuJPxK/H+vGP9HTxXBQPRfFQFA9F8VAUD0XxUBQPRfFQFA9F8VAUD0XxUBQPRfFQFA9F8VAUD+X/v4JEubdx4kYAAAAASUVORK5CYII=" alt="plot of chunk unnamed-chunk-1"/> </p>
-
-<pre><code>## NULL
-</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAeFBMVEX9/v0AAAAAADkAAGUAOTkAOY8AZo8AZrU5AAA5ADk5AGU5OY85ZrU5j9plAABlADllAGVlZgBltbVltf2POQCPOTmPOWWPj2WPtY+P29qP2/21ZgC1tWW124+1/v3ajzna24/a/v39tWX924/9/rX9/tr9/v3/AACPxkj3AAAAKHRSTlP//////////////////////////////////////////////////wD/AIw85wAAAAlwSFlzAAALEgAACxIB0t1+/AAADRpJREFUeJztnYl64sgVRkd2HMj04HYC00mbxB6z9fu/YVQSYAwCVMuVSvrP+T4W29Ktkg61qoR/24Ekv/WdAegHxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF6U8YrfPBfz3W67eHw7+dXJD9d2cpxudrmT22iSMKe9MGrxTx+B4t2eV3faLtwWQzc/avHFbC/+vTQ13ztcT/cl2v1yVtUJ/z2W8dqye6523Dw/fdS/2kdwrKdPH+7R36GlYMziH/+597esSvGsElqX6VJb/cvJvgDvS/A18YcIB1Yn74fJqMX/bzpz/qri6d44h4eyup4+vJbbPLyW4melyPq3h6p+svsi/hhhH3s5eO/jFv+2fPhZ2lrVMh9ejyW+NLiqyvh7Md8uqk/AF/GHXuFB/DHCIfiXrsMgGbf4zfPfz8VXbXz5/kT83vDnTvum/4r4as/locUfKuMW7/pkn7X7Zwe91HZS1Z+Jdx+NuWv65+XuJ1X9gfXUfTg+S/8wGbn4Ut+xa3ZwuB+oL88b8+NOpe+znY4/VJGXZwO+QTJy8WW97J6XtaljVV8V18/h3Ln48uMyqZr7fx2Hc8sT124cMHTvIxYPN0G8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFFixBeQM4biI/YFa6LF1/ccFQ13hyI+Z2LFbxf1baGry5uGEJ8zseI3L29fXtuHhl6hxIsS3cY3fANYu9DQK/TqRUG8KCmGc+57BOjcDYwUnbvtYob4oZFmOLecIH5gJBrOvf/td8QPigTDuepbHN8/x3MtLwNAr9CrFwXxoqQST+duYFDiRUG8KCzEEIXLsqKwEEMUSrwoLMQQhV69KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRYkVv3l5222ei+Lpwzc09EoC8c79bv2Hb2jolQTi198+6pLvFxp6JVr888PPH67Ef7uo6xGfM/Gdu+2imOxWjxcFHvFZQ69eFMSLgnhREC9KfK++qLns3SE+Z6JL/HYxCwsNvRJf1W++v56FPBCeKzCHNl4UxIuSSjxz9QODEi8K4kWJFr+eXhnGIz5rYsVvF/PqdXW5BAfxOZNi6dXpa/vQ0CuUeFGi2/j9ZD1t/MCgVy8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBelO7E//rFo89Hb+IhKxAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwZef87JsRbkfk/4kK8FYgXBfGqZO0d8WYUeZ2B848h4q3IS/xFw4N4I4rjUxYgviOKk+ccQHxH5CaeNr4birPX3rnICOJNQPyA+NVwF3kgxcWbnrnMB+IP/PqVzHzR+LZHGnKB+AOIP0VGfFGkE19ced8bTZlA/O4w1LEo8HmcBcQ3cTrATZJlr/FyFzRmQVy833RWu5A3f+wDxB+pa/WG66YJ8pyd+OYcSIqv+nGNV8vj82zxWYriSvq64pv/FJtp75kSc6zEr6fVhZ/HN9/QPaIk/lryseK3i3n1unr68AzdH8WtkVtcrm2ajxisxG9e3r68tg/dG7fzNTLxVxOXK/F3V0DGZDtk4GTK9bSj2/jN86Da+PuZish2WD/KEkPxIYn2R5s8hec7O/E3UpYS326he3C+A/tRhiC+om2GQjMe2pEy41a6QuJb5ycw48HtqRU3k20nfrso+2+Tpg32fbum3l1e4n3uZwrKeXi1akW8+O1iVj6/N5qv/xYQulu8MpNafD+nImq+ohZfz840zNFUf/z+ehbyQOss2uOZF++s3znaoYqvC3tziQ8O3RXXLsTdwnv7O5/zOw5MysidmO1K/PWGPDx0R4QtpfOtIe5VcDc/FTa1YwrxLch2rn4g4pOfrMiZ6eEP5wIXz/pl/q65+yX+TH/sR+Hu3qMXX4Qtnk09Crhj/uTt58fAJwveWRr9Qozk03Bhm/qN8iNr/zb7jv2ybPKJ98AtPaf1osS32rnXhRj2Y/3011hDt/OcyI8x34n4mBJvP8sTEz1WaMvt0k74HSfP7Nv4iIUYeYuPrcLbbRg1vbY7qTRPdXfRxoeG7mRe13hElOLKT9w0i0cJ94xsIv6Yz6y9xw+JWmzcola88+fQc9iZ+H0GzzJqKT46duTkV5ut42cAchf/WSMN6JF5fv3OaZ/i722UlASRb4ZI0Kq2DNG8me2c7nDFJwl8I4h//GDxjQU29vi6buM900+UePooIfHP9/GIcbZpgk5xZ+LjtrJJu0WcK6c4KP65vdB9k4yFEH8zTFMDlaoj7RfkuHWiIfA4xScs8BczJKlGUL4xDtdrg5K+l5kLOrgeb2A+WchTyUXTpyA8XwGdw6QTnWMUnzDilZoe8RGhPTdLn3Bw+ODTXzS+9Uh3VOKTezL2HkNx8cZr75SXNsYnPmPvkeKTMjrx/Z/SGxRnrz2SgfiEp8HdNZMsmAXFl5c+GZX4hN88bkRx8twviO+U4vjUNzmIT3Ym8hdfHSri/be8Eyd77+5Qs/A+KvF5nNHbWK8rbk0W4s1XTWSD/YrytoxHfB7n8w6ID97UMEQHID5iW5sAHZGL97GIz+RsDohxiMe7N5mIj1OHd38QL0ou4mPk4T2AEYjHewjDF4/3ILIRHyoQ72EMXTzeAxm4eLyHko/4oKXm/rtAzXDFZ7+wMm8GK34Ay6yyJiPxfjsgPo5BincXtREfx+DEH1cy4D2KnMRf32MvOZvlKyNgEOKrah3pSRmO+IicwCVZib+2C+LTMwTxBR259OQvnqbdhLzEN+yDdhsyF09xtyJv8Wg3IzPxX3aiuBuSsXi0W5KteIq7LbmJP+yFdmPyFE9xNyc/8e67uSNShXbkJj6fbw4YOYgXBfGi5CY+n+8KGTnZiYduQLwoiBclVvzm5W23eS6Kpw/f0NArCcQ797v1H76hoVcSiF9/+6hLvl9o6JVo8c8PP3+4Ev/toq5HfM7Ed+62i2KyWz1eFHjEZ013vXq3QppHf4/exENWRItfT6vpdar6gRErfruYV6+ry4E84nMmxQTO6Wv70NArlHhRott4N1/7tY0vDsTmDQyhVy8K4kVJJZ7O3cCgxIuCeFGYuROFcbwozNyJQokXxWDmrmVo6BV69aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBclWvx6Wjge33xDQ6/Eit8u5tXr6unDMzT0Sqz4zcvbl9f2oaFXKPGiRLfxm2fa+CFCr14UxIvCcE4UOneiMJwThRIvisFwrjgQmzcwhF69KIgXJZV4OncDgxIvCuJFYeZOFMbxojBzJwolXhQWYohCr14UxIuCeFEsxUPO2Im3ppMaRTURxIsmgnjRRBAvmgjiRRNBvGgiiBdNJGfxYAjiRUG8KIgXBfGiIF4UxIuCeFEQLwriRclW/HvRuLI3Kevf36pVxJcrx1MnYns07manueeRZCt+OTdPYuVcuPsG3ifGidgezeb76279j1e/I8lV/PbPV+sklg//KQuju0OoKpSWidgezcrZXs79jiRX8dVtHNaF3p2m9bePqsiYJmJ/NOUh+B1JruLLqsu+1Dsn7tYwc/HmR7NdzDyPJFfxFdbtfGclvsLwaDbPs53nkciLN27jOxG/nrrQ42jjXb21/dHBcM5Vkpa9+mN7Ync0tXfPI8lVvBv5Plh37Dsdx9sdzXt148x8JON4sAXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLoix+u6hWKT79Zbm6OleUxe92tivqswbx1dP2z38XxWxVPqr11tb3Z2cA4mvxi8luPZ1UPy+N77DIA8TvS3x9V+Pm+6u7/azhvyuODcRfiHe3NJvfxNM7iL8QP/7S7kD8uXjXxjf8P9WxgfgL8WVdP/6aXl28LogXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgX5f/7/WSSn21iTQAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-1"/> </p>
 
 </body>
 

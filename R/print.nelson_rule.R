@@ -15,6 +15,7 @@ print.nelson_rule <- function(x, ...) {
     tmp <- paste(x$which, collapse=", ")
     cat(paste0("\nWhich: ", tmp))
   }
-  cat(paste0("\nLength: ", length(x$x)))
+  cat(paste0("\nLength of data (x): ", length(x$x)))
   cat("\n")
+  invisible(x)
 }
