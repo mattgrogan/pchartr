@@ -17,9 +17,10 @@ lcl <- mean - 3 * sd
 #-----------------------------------------------------------
 
 test_that("no fifteen points are within 1 SD", {
-  r <- nelson.rule7(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(FALSE))
-  expect_that(length(r$matches), equals(0))
+  rslt <- nelson.rule7(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(FALSE))
+  expect_that(length(rslt$matches), equals(0))
+  expect_that(rslt$first, equals(NULL))
 })
 
 test_that("fifteen points are within 1 SD", {
@@ -28,8 +29,9 @@ test_that("fifteen points are within 1 SD", {
   x[5:19] <- mean[5:19] - 0.01
   
   # Do test
-  r <- nelson.rule7(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(19))
-  expect_that(r$which, equals(1:19))
+  rslt <- nelson.rule7(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(19))
+  expect_that(rslt$which, equals(1:19))
+  expect_that(rslt$first, equals(16))
 })

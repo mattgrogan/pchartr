@@ -17,9 +17,10 @@ lcl <- mean - 3 * sd
 #-----------------------------------------------------------
 
 test_that("no eights points are outside 1 SD", {
-  r <- nelson.rule8(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(FALSE))
-  expect_that(length(r$matches), equals(0))
+  rslt <- nelson.rule8(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(FALSE))
+  expect_that(length(rslt$matches), equals(0))
+  expect_that(rslt$first, equals(NULL))
 })
 
 test_that("eight points are outside 1 SD", {
@@ -28,8 +29,9 @@ test_that("eight points are outside 1 SD", {
   x[1:8] <- ucl[1:8] - 0.01
   
   # Do test
-  r <- nelson.rule8(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(8))
-  expect_that(r$which, equals(1:8))
+  rslt <- nelson.rule8(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(8))
+  expect_that(rslt$which, equals(1:8))
+  expect_that(rslt$first, equals(8))
 })

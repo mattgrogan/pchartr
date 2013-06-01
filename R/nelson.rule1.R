@@ -10,6 +10,7 @@
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
+#' \item{first}{index of first violation}
 #' @export
 nelson.rule1 <- function(x, mean, ucl, lcl) { 
   
@@ -21,6 +22,10 @@ nelson.rule1 <- function(x, mean, ucl, lcl) {
   
   retval$rule <- 1 
   retval$descr <- "Points outside the control limits"
+  
+  if(length(retval$which) > 0) {
+     retval$first <- min(retval$which)
+  }
   
   retval$x <- x
   retval$mean <- mean

@@ -10,12 +10,16 @@
 #' @export
 print.nelson_rule <- function(x, ...) {
   cat(paste0("\nNelson Rule ", x$rule, ': ', x$descr, "\n"))
+
   cat(paste0("\nViolated: ", x$violated))
+  cat(paste0("\nTested against dataset of length ", length(x$x)))
+
   if (x$violated) {
+    cat(paste0("\nFirst detected at point ", x$first))
     tmp <- paste(x$which, collapse=", ")
     cat(paste0("\nWhich: ", tmp))
   }
-  cat(paste0("\nLength of data (x): ", length(x$x)))
+
   cat("\n")
   invisible(x)
 }

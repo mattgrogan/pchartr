@@ -17,22 +17,24 @@ lcl <- mean - 3 * sd
 #-----------------------------------------------------------
 
 test_that("no six points are increasing or decreasing", {
-  r <- nelson.rule3(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(FALSE))
-  expect_that(length(r$matches), equals(0))
+  rslt <- nelson.rule3(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(FALSE))
+  expect_that(length(rslt$matches), equals(0))
+  expect_that(rslt$first, equals(NULL))
 })
 
 test_that("six points are increasing", {
   
   # Set up data
-  i <- seq(0.01, 7)
-  x[10:16] <- lcl[10] + i
+  i <- seq(0.01, 8)
+  x[10:17] <- lcl[10] + i
   
   # Run test
-  r <- nelson.rule3(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(6))
-  expect_that(r$which, equals(11:16))
+  rslt <- nelson.rule3(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(7))
+  expect_that(rslt$which, equals(11:17))
+  expect_that(rslt$first, equals(16))
 })
 
 test_that("six points are decreasing", {
@@ -42,8 +44,9 @@ test_that("six points are decreasing", {
   x[10:16] <- ucl[10] - i
   
   # Run test
-  r <- nelson.rule3(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(6))
-  expect_that(r$which, equals(11:16))
+  rslt <- nelson.rule3(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(6))
+  expect_that(rslt$which, equals(11:16))
+  expect_that(rslt$first, equals(16))
 })

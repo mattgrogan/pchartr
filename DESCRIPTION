@@ -1,10 +1,11 @@
 Package: pchartr
-Title: Tools for analyzing control charts, specifically p-charts.
+Title: pchartr is a set of tools for analyzing control charts, specifically
+    p-charts.
 Version: 0.1
 Authors@R: c(person("Matthew", "Grogan", role = c("aut", "cre"),
     email = "mvgnyc@gmail.com"))
 Description: This package contains tools for detecting out-of-control conditions
-    using the rules proposed by Lloyd Nelson.
+    on control charts using the rules proposed by Lloyd Nelson.
 Depends:
     R (>= 3.0.0)
 License: GPL-2

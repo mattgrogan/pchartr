@@ -11,10 +11,14 @@
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
+#' \item{first}{index of first violation}
 #' @export
 nelson.rule6 <- function(x, mean, ucl, lcl) {
   
-  retval <- list(violated=FALSE, which=NULL)
+  retval <- list(violated=FALSE, which=NULL, first=NULL)
+  
+  first_above <- NULL
+  first_below <- NULL
   
   # Get a vector of differences
   sd <- (ucl - mean) / 3 # Assuming that ucl and lcl are both 3sd from mean
@@ -28,11 +32,15 @@ nelson.rule6 <- function(x, mean, ucl, lcl) {
   result <- gregexpr('(11111)|(10111)|(11011)|(11101)|(1111)', tmp)[[1]]
   
   # Aggregate the results into the return value
-  if (result >= 0) {
+  if (result[1] >= 0) {
     for (i in 1:length(result)) {
       m <- result[i] + attr(result, 'match.length')[i] - 1
       retval$which <- c(retval$which, seq(result[i],m))
     }
+    
+    # Find the time that we first recognize the violation
+    first.result <- gregexpr('(11111)|(10111)|(11011)|(11101)|(1111)', tmp)[[1]]
+    first_above <- first.result[1] + attr(first.result, 'match.length')[1] - 1
   }
   
   # Find the ones below the mean
@@ -49,7 +57,17 @@ nelson.rule6 <- function(x, mean, ucl, lcl) {
       m <- result[i] + attr(result, 'match.length')[i] - 1
       retval$which <- c(retval$which, seq(result[i],m))
     }
-  }    
+    
+    # Find the time that we first recognize the violation
+    first.result <- gregexpr('(11111)|(10111)|(11011)|(11101)|(1111)', tmp)[[1]]
+    first_below <- first.result[1] + attr(first.result, 'match.length')[1] - 1
+  }
+  
+  # Which event occurs first?
+  if (!is.null(first_above) | !is.null(first_below)) {
+    retval$first = max(first_above, first_below, na.rm=TRUE)    
+  }
+  
   retval$violated <- any(retval$which)
  
   retval$rule <- 6

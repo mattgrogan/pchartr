@@ -11,10 +11,12 @@
 #' @return A list containing the following components:
 #' \item{violated}{boolean indicating if the rule was violated}
 #' \item{matches}{vector of indices which violate the rule}
+#' \item{first}{index of first violation}
+#' 
 #' @export
 nelson.rule8 <- function(x, mean, ucl, lcl) {
   
-  retval <- list(violated=FALSE, which=NULL)
+  retval <- list(violated=FALSE, which=NULL, first=NULL)
   
   # Get a vector of differences
   sd <- (ucl - mean) / 3 # Assuming that ucl and lcl are both 3sd from mean
@@ -28,11 +30,15 @@ nelson.rule8 <- function(x, mean, ucl, lcl) {
   result <- gregexpr('1{8,}', tmp)[[1]]
   
   # Aggregate the results into the return value
-  if (result >= 0) {
+  if (result[1] >= 0) {
     for (i in 1:length(result)) {
       m <- result[i] + attr(result, 'match.length')[i] - 1
       retval$which <- c(retval$which, seq(result[i],m))
     }
+    
+    # Find the time that we first recognize the violation
+    first.result <- gregexpr('1{8,}?', tmp)[[1]]
+    retval$first <- first.result[1] + attr(first.result, 'match.length')[1] - 1
   }
   
   retval$violated <- any(retval$which)

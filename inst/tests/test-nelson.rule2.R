@@ -17,23 +17,26 @@ lcl <- mean - 3 * sd
 #-----------------------------------------------------------
 
 test_that("no nine points are on the same side of the mean", {
-  r <- nelson.rule2(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(FALSE))
-  expect_that(length(r$matches), equals(0))
+  rslt <- nelson.rule2(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(FALSE))
+  expect_that(length(rslt$matches), equals(0))
+  expect_that(rslt$first, equals(NULL))
 })
 
 test_that("nine points are above the mean", {
   x[8:20] <- mean[8:20] + 0.01
-  r <- nelson.rule2(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(13))
-  expect_that(r$which, equals(8:20))
+  rslt <- nelson.rule2(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(13))
+  expect_that(rslt$which, equals(8:20))
+  expect_that(rslt$first, equals(17))
 })
 
 test_that("nine points are below the mean", {
   x[8:20] <- mean[8:20] - 0.01
-  r <- nelson.rule2(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(14))
-  expect_that(r$which, equals(7:20))
+  rslt <- nelson.rule2(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(14))
+  expect_that(rslt$which, equals(7:20))
+  expect_that(rslt$first, equals(16))
 })

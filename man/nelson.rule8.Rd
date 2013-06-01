@@ -17,7 +17,7 @@
   A list containing the following components:
   \item{violated}{boolean indicating if the rule was
   violated} \item{matches}{vector of indices which violate
-  the rule}
+  the rule} \item{first}{index of first violation}
 }
 \description{
   Checks for eight consecutive points with none within one

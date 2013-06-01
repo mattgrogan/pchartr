@@ -17,9 +17,10 @@ lcl <- mean - 3 * sd
 #-----------------------------------------------------------
 
 test_that("no four out of five points are outside 1 SD", {
-  r <- nelson.rule6(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(FALSE))
-  expect_that(length(r$matches), equals(0))
+  rslt <- nelson.rule6(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(FALSE))
+  expect_that(length(rslt$matches), equals(0))
+  expect_that(rslt$first, equals(NULL))
 })
 
 test_that("four out of five points are outside 1 SD", {
@@ -29,8 +30,9 @@ test_that("four out of five points are outside 1 SD", {
   x[pts] <- (ucl[pts] - mean[pts]) / 3 + 0.01
   
   # Do test
-  r <- nelson.rule6(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(5))
-  expect_that(r$which, equals(10:14))
+  rslt <- nelson.rule6(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(5))
+  expect_that(rslt$which, equals(10:14))
+  expect_that(rslt$first, equals(14))
 })

@@ -61,8 +61,9 @@ nelson.rule
 ## Nelson Rule 3: 6+ points increasing or decreasing
 ## 
 ## Violated: TRUE
+## Tested against dataset of length 20
+## First detected at point 9
 ## Which: 4, 5, 6, 7, 8, 9
-## Length of data (x): 20
 ```
 
 ```r

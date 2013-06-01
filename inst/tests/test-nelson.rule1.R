@@ -17,17 +17,21 @@ lcl <- mean - 3 * sd
 #-----------------------------------------------------------
 
 test_that("no data points are outside the control limits", {
-  r <- nelson.rule1(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(FALSE))
-  expect_that(length(r$matches), equals(0))
+  rslt <- nelson.rule1(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(FALSE))
+  expect_that(length(rslt$matches), equals(0))
+  expect_that(rslt$first, equals(NULL))
 })
 
 test_that("two data points are outside the control limits", {
   x[10] <- 0.15
   x[11] <- 0.03
-  r <- nelson.rule1(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(2))
-  expect_that(r$which[1], equals(10))
-  expect_that(r$which[2], equals(11))
+  rslt <- nelson.rule1(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(2))
+  expect_that(rslt$which[1], equals(10))
+  expect_that(rslt$which[2], equals(11))
+  
+  # First is correctly identified
+  expect_that(rslt$first, equals(10))
 })

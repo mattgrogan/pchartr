@@ -1,0 +1,4 @@
+- Fix plot so that ylim includes ucl and lcl by default
+- Add test cases for multiple series
+- Fix code for consistent use of underscore or dot in variable names
+- Pretty print for $which

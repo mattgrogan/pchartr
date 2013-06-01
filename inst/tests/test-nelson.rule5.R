@@ -17,9 +17,10 @@ lcl <- mean - 3 * sd
 #-----------------------------------------------------------
 
 test_that("no two out of three points are outside 2 SD", {
-  r <- nelson.rule5(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(FALSE))
-  expect_that(length(r$matches), equals(0))
+  rslt <- nelson.rule5(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(FALSE))
+  expect_that(length(rslt$matches), equals(0))
+  expect_that(rslt$first, equals(NULL))
 })
 
 test_that("two out of three points are above", {
@@ -28,10 +29,11 @@ test_that("two out of three points are above", {
   x[c(10,12)] <- ucl[c(11,12)] - 0.01
   
   # Do test
-  r <- nelson.rule5(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(3))
-  expect_that(r$which, equals(10:12))
+  rslt <- nelson.rule5(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(3))
+  expect_that(rslt$which, equals(10:12))
+  expect_that(rslt$first, equals(12))
 })
 
 test_that("two out of three points are below", {
@@ -40,8 +42,9 @@ test_that("two out of three points are below", {
   x[c(10,12)] <- lcl[c(11,12)] + 0.01
   
   # Do test
-  r <- nelson.rule5(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(3))
-  expect_that(r$which, equals(10:12))
+  rslt <- nelson.rule5(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(3))
+  expect_that(rslt$which, equals(10:12))
+  expect_that(rslt$first, equals(12))
 })

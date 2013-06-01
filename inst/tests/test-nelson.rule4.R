@@ -17,17 +17,19 @@ lcl <- mean - 3 * sd
 #-----------------------------------------------------------
 
 test_that("data points are not alternating", {
-  r <- nelson.rule4(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(FALSE))
-  expect_that(length(r$matches), equals(0))
+  rslt <- nelson.rule4(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(FALSE))
+  expect_that(length(rslt$matches), equals(0))
+  expect_that(rslt$first, equals(NULL))
 })
 
 test_that("fourteen points are alternating", {
-  odds <- seq(1, 13, by=2)
+  odds <- seq(1, 15, by=2)
   x[odds] <- mean[odds] - 0.02
   x[odds+1] <- mean[odds+1] + 0.02
-  r <- nelson.rule4(x, mean, ucl, lcl)
-  expect_that(r$violated, equals(TRUE))
-  expect_that(length(r$which), equals(14))
-  expect_that(r$which, equals(2:15))
+  rslt <- nelson.rule4(x, mean, ucl, lcl)
+  expect_that(rslt$violated, equals(TRUE))
+  expect_that(length(rslt$which), equals(16))
+  expect_that(rslt$which, equals(2:17))
+  expect_that(rslt$first, equals(15))
 })
