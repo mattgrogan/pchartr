@@ -14,7 +14,7 @@ Ultimately this package will serve two purposes:
 Functions
 =========
 
-There are functions for checking control charts for violations of the eight [Nelson rules](http://en.wikipedia.org/wiki/Nelson_rules).
+There are functions for checking control charts for violations of the eight Nelson Rules ([Wikipedia](http://en.wikipedia.org/wiki/Nelson_rules)).
 
 
 * `nelson.rule1()` checks for any points outside the upper and lower control limits.
@@ -25,6 +25,16 @@ There are functions for checking control charts for violations of the eight [Nel
 * `nelson.rule6()` checks for four out of five points that are more than one standard deviation from the mean
 * `nelson.rule7()` checks for fifteen consecutive points within one standard deviation of the mean.
 * `nelson.rule8()` checks for eight consecutive points with none within one standard deviation of the mean.
+
+Installation
+============
+
+Use the `devtools` package to install directly from github:
+
+```
+library(devtools)
+install_github('pchartr', 'mattgrogan')
+```
 
 Example
 =======

@@ -193,7 +193,7 @@ hljs.initHighlightingOnLoad();
 
 <h1>Functions</h1>
 
-<p>There are functions for checking control charts for violations of the eight <a href="http://en.wikipedia.org/wiki/Nelson_rules">Nelson rules</a>.</p>
+<p>There are functions for checking control charts for violations of the eight Nelson Rules (<a href="http://en.wikipedia.org/wiki/Nelson_rules">Wikipedia</a>).</p>
 
 <ul>
 <li><code>nelson.rule1()</code> checks for any points outside the upper and lower control limits.</li>
@@ -205,6 +205,14 @@ hljs.initHighlightingOnLoad();
 <li><code>nelson.rule7()</code> checks for fifteen consecutive points within one standard deviation of the mean.</li>
 <li><code>nelson.rule8()</code> checks for eight consecutive points with none within one standard deviation of the mean.</li>
 </ul>
+
+<h1>Installation</h1>
+
+<p>Use the <code>devtools</code> package to install directly from github:</p>
+
+<pre><code>library(devtools)
+install_github(&#39;pchartr&#39;, &#39;mattgrogan&#39;)
+</code></pre>
 
 <h1>Example</h1>
 
