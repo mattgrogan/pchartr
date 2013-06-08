@@ -20,7 +20,7 @@ test_that("no nine points are on the same side of the mean", {
   rslt <- nelson.rule2(x, mean, ucl, lcl)
   expect_that(rslt$violated, equals(FALSE))
   expect_that(length(rslt$matches), equals(0))
-  expect_that(rslt$first, equals(NULL))
+  expect_that(rslt$first, equals(NA))
 })
 
 test_that("nine points are above the mean", {

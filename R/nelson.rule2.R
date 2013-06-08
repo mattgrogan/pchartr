@@ -13,7 +13,7 @@
 #' \item{first}{index of first violation}
 #' @export
 nelson.rule2 <- function(x, mean, ucl, lcl) {
-  retval <- list(violated=FALSE, which=NULL, first=NULL)
+  retval <- list(violated=FALSE, which=NULL, first=NA)
   
   # Get a vector with 1 = above mean and 2 = below mean
   tmp <- ifelse(x >= mean, 1, 0)

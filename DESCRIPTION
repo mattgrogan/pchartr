@@ -23,5 +23,6 @@ Collate:
     'plot.nelson_rule.R'
     'print.nelson_rule.R'
     'is.nelson_rule.R'
+    'pchart_power.R'
 Suggests:
     testthat (>= 0.2)

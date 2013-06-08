@@ -20,7 +20,7 @@ test_that("no fifteen points are within 1 SD", {
   rslt <- nelson.rule7(x, mean, ucl, lcl)
   expect_that(rslt$violated, equals(FALSE))
   expect_that(length(rslt$matches), equals(0))
-  expect_that(rslt$first, equals(NULL))
+  expect_that(rslt$first, equals(NA))
 })
 
 test_that("fifteen points are within 1 SD", {

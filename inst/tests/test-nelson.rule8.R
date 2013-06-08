@@ -20,7 +20,7 @@ test_that("no eights points are outside 1 SD", {
   rslt <- nelson.rule8(x, mean, ucl, lcl)
   expect_that(rslt$violated, equals(FALSE))
   expect_that(length(rslt$matches), equals(0))
-  expect_that(rslt$first, equals(NULL))
+  expect_that(rslt$first, equals(NA))
 })
 
 test_that("eight points are outside 1 SD", {

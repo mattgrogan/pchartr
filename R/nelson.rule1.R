@@ -23,6 +23,8 @@ nelson.rule1 <- function(x, mean, ucl, lcl) {
   retval$rule <- 1 
   retval$descr <- "Points outside the control limits"
   
+  retval$first <- NA
+  
   if(length(retval$which) > 0) {
      retval$first <- min(retval$which)
   }

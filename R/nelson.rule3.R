@@ -14,7 +14,7 @@
 #' @export
 nelson.rule3 <- function(x, mean, ucl, lcl) {
   
-  retval <- list(violated=FALSE, which=NULL, first=NULL)
+  retval <- list(violated=FALSE, which=NULL, first=NA)
   
   # Get a vector of differences
   tmp <- ifelse(diff(x) >= 0, 1, 0)

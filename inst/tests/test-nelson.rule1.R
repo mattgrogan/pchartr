@@ -20,7 +20,7 @@ test_that("no data points are outside the control limits", {
   rslt <- nelson.rule1(x, mean, ucl, lcl)
   expect_that(rslt$violated, equals(FALSE))
   expect_that(length(rslt$matches), equals(0))
-  expect_that(rslt$first, equals(NULL))
+  expect_that(rslt$first, equals(NA))
 })
 
 test_that("two data points are outside the control limits", {

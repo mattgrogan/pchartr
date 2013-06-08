@@ -14,7 +14,7 @@
 #' @export
 nelson.rule7 <- function(x, mean, ucl, lcl) {
   
-  retval <- list(violated=FALSE, which=NULL, first=NULL)
+  retval <- list(violated=FALSE, which=NULL, first=NA)
   
   # Get a vector of differences
   sd <- (ucl - mean) / 3 # Assuming that ucl and lcl are both 3sd from mean

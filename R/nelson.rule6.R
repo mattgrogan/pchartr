@@ -15,7 +15,7 @@
 #' @export
 nelson.rule6 <- function(x, mean, ucl, lcl) {
   
-  retval <- list(violated=FALSE, which=NULL, first=NULL)
+  retval <- list(violated=FALSE, which=NULL, first=NA)
   
   first_above <- NULL
   first_below <- NULL

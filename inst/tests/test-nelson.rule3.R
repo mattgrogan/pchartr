@@ -20,7 +20,7 @@ test_that("no six points are increasing or decreasing", {
   rslt <- nelson.rule3(x, mean, ucl, lcl)
   expect_that(rslt$violated, equals(FALSE))
   expect_that(length(rslt$matches), equals(0))
-  expect_that(rslt$first, equals(NULL))
+  expect_that(rslt$first, equals(NA))
 })
 
 test_that("six points are increasing", {

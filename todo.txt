@@ -1,4 +1,21 @@
+
+NELSON RULES
+------------
+
 - Fix plot so that ylim includes ucl and lcl by default
 - Add test cases for multiple series
 - Fix code for consistent use of underscore or dot in variable names
 - Pretty print for $which
+
+POWER ANALYSIS
+--------------
+
+- What is the probability of detecting the out of control situation?
+- How long does it take to detect the out of control situation?
+- What is the probability of detecting at time one, time two, etc.?
+
+
+Right now, the pchart_power function only shows the data, it will need to 
+perform some analysis
+
+- Override the print and plot functions for power results

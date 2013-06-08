@@ -20,7 +20,7 @@ test_that("no two out of three points are outside 2 SD", {
   rslt <- nelson.rule5(x, mean, ucl, lcl)
   expect_that(rslt$violated, equals(FALSE))
   expect_that(length(rslt$matches), equals(0))
-  expect_that(rslt$first, equals(NULL))
+  expect_that(rslt$first, equals(NA))
 })
 
 test_that("two out of three points are above", {
