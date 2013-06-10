@@ -13,8 +13,6 @@
 #' @export
 pchart_power <- function(n, p, p.mean = p, ucl = NA, lcl = NA, len = 50, nRep = 200) {
   
-
-
   # ---------------------------------------------
   # Expand mean
   if (length(mean) == 1) {
@@ -45,8 +43,8 @@ pchart_power <- function(n, p, p.mean = p, ucl = NA, lcl = NA, len = 50, nRep = 
   # Run the simulation
   
   # Set up data matrix
-  firsts <- matrix(NA, nRep, 8)
-  colnames(firsts) <- paste("Rule", 1:8, sep=".")
+  firsts <- matrix(NA, nRep, 9)
+  colnames(firsts) <- c(paste("Rule", 1:8, sep="."), "Any.Rule")
   
   for (i in 1:nRep) {
     
@@ -63,6 +61,29 @@ pchart_power <- function(n, p, p.mean = p, ucl = NA, lcl = NA, len = 50, nRep = 
     firsts[i, 8] <- nelson.rule8(x, p.mean, ucl, lcl)$first
   }
   
-  firsts
+  # Which is the first detection for any of the eight rules?
+  fmin <- function(x) { 
+    if (!all(is.na(x))) { 
+      return(min(x, na.rm = TRUE))
+    } else {
+      return(NA)
+    }
+  }
+  
+  firsts[, "Any.Rule"] <- apply(firsts, 1, fmin)
+
+  # ---------------------------------------------
+  # Aggregate the data into cumulative proportions
+  f <- function(firsts.vector, len) {
+    out <- rep(NA, len)
+    for (i in 1:len) {
+      out[i] <- sum(firsts.vector <= i, na.rm = TRUE) / length(firsts.vector)
+    }
+    out
+  }
+  rslt <- apply(firsts, 2, f, len)
+  
+  
+  rslt
   
 }
